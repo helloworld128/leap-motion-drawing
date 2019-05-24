@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Fri May 24 11:16:31 2019
+Fri May 24 12:06:54 2019
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -48,16 +48,16 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri May 24 11:16:31 2019            ;
+; Analysis & Synthesis Status        ; Successful - Fri May 24 12:06:54 2019            ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; top                                              ;
 ; Top-level Entity Name              ; top                                              ;
 ; Family                             ; Cyclone II                                       ;
-; Total logic elements               ; 531                                              ;
-;     Total combinational functions  ; 370                                              ;
-;     Dedicated logic registers      ; 295                                              ;
-; Total registers                    ; 295                                              ;
-; Total pins                         ; 163                                              ;
+; Total logic elements               ; 298                                              ;
+;     Total combinational functions  ; 138                                              ;
+;     Dedicated logic registers      ; 237                                              ;
+; Total registers                    ; 237                                              ;
+; Total pins                         ; 79                                               ;
 ; Total virtual pins                 ; 0                                                ;
 ; Total memory bits                  ; 0                                                ;
 ; Embedded Multiplier 9-bit elements ; 0                                                ;
@@ -185,28 +185,28 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 531   ;
+; Estimated Total logic elements              ; 298   ;
 ;                                             ;       ;
-; Total combinational functions               ; 370   ;
+; Total combinational functions               ; 138   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 91    ;
-;     -- 3 input functions                    ; 144   ;
-;     -- <=2 input functions                  ; 135   ;
+;     -- 4 input functions                    ; 48    ;
+;     -- 3 input functions                    ; 38    ;
+;     -- <=2 input functions                  ; 52    ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 276   ;
-;     -- arithmetic mode                      ; 94    ;
+;     -- normal mode                          ; 106   ;
+;     -- arithmetic mode                      ; 32    ;
 ;                                             ;       ;
-; Total registers                             ; 295   ;
-;     -- Dedicated logic registers            ; 295   ;
+; Total registers                             ; 237   ;
+;     -- Dedicated logic registers            ; 237   ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 163   ;
+; I/O pins                                    ; 79    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
 ; Maximum fan-out node                        ; rst   ;
-; Maximum fan-out                             ; 143   ;
-; Total fan-out                               ; 2043  ;
-; Average fan-out                             ; 2.47  ;
+; Maximum fan-out                             ; 129   ;
+; Total fan-out                               ; 1232  ;
+; Average fan-out                             ; 2.71  ;
 +---------------------------------------------+-------+
 
 
@@ -215,11 +215,11 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name    ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
-; |top                       ; 370 (13)          ; 295 (61)     ; 0           ; 0            ; 0       ; 0         ; 163  ; 0            ; |top                   ; work         ;
+; |top                       ; 138 (13)          ; 237 (30)     ; 0           ; 0            ; 0       ; 0         ; 79   ; 0            ; |top                   ; work         ;
 ;    |SRAM:rm|               ; 9 (9)             ; 119 (119)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|SRAM:rm           ; work         ;
-;    |VGA_Controller:v2|     ; 61 (61)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|VGA_Controller:v2 ; work         ;
+;    |VGA_Controller:v2|     ; 72 (72)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|VGA_Controller:v2 ; work         ;
 ;    |VGActSRAM:vtran|       ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|VGActSRAM:vtran   ; work         ;
-;    |uart:u2|               ; 287 (287)         ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|uart:u2           ; work         ;
+;    |uart:u2|               ; 44 (44)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|uart:u2           ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -237,94 +237,46 @@ Encoding Type:  One-Hot
 +-----------------+---------------+-----------------+----------------+------------+
 
 
-+----------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                ;
-+-----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------+------------------------+
-; uart:u2|draw                                        ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[0]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[1]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[2]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[3]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[4]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[5]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[6]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[7]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[8]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[9]                                  ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[10]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[11]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[12]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[13]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[14]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[15]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[16]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[17]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[18]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[19]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[20]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[21]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[22]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[23]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[24]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[25]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[26]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[27]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[28]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[29]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[30]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|RamData[31]                                 ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[0]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[0]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[1]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[1]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[2]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[2]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[3]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[3]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[4]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[4]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[5]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[5]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[6]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[6]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[7]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[7]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[8]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[8]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[9]                                 ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[9]                                ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[10]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[10]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[11]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[11]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[12]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[12]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[13]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[13]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[14]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[14]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[15]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|pre_yaxis[15]                               ; uart:u2|Equal2      ; yes                    ;
-; uart:u2|tempData[16]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[17]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[18]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[19]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[20]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[21]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[22]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[23]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[24]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[25]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[26]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[27]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[28]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[29]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[30]                                ; uart:u2|tempData[0] ; yes                    ;
-; uart:u2|tempData[31]                                ; uart:u2|tempData[0] ; yes                    ;
-; Number of user-specified and inferred latches = 81  ;                     ;                        ;
-+-----------------------------------------------------+---------------------+------------------------+
++-----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                 ;
++-----------------------------------------------------+----------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal  ; Free of Timing Hazards ;
++-----------------------------------------------------+----------------------+------------------------+
+; uart:u2|draw                                        ; uart:u2|Equal1       ; yes                    ;
+; uart:u2|tempData[0]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[1]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[2]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[3]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[4]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[5]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[6]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[7]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[8]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[9]                                 ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[10]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[11]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[12]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[13]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[14]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[15]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[16]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[17]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[18]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[19]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[20]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[21]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[22]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[23]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[24]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[25]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[26]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[27]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[28]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[29]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[30]                                ; uart:u2|tempData[31] ; yes                    ;
+; uart:u2|tempData[31]                                ; uart:u2|tempData[31] ; yes                    ;
+; Number of user-specified and inferred latches = 33  ;                      ;                        ;
++-----------------------------------------------------+----------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
@@ -333,19 +285,15 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+----------------------------------------+
 ; Register name                          ; Reason for Removal                     ;
 +----------------------------------------+----------------------------------------+
-; uart:u2|tx8bit[7]                      ; Stuck at VCC due to stuck port data_in ;
 ; VGA_Controller:v2|addr[19]             ; Stuck at GND due to stuck port data_in ;
 ; addr_for_ram_read[19]                  ; Stuck at GND due to stuck port data_in ;
 ; SRAM:rm|BASERAMADDR[19]~reg0           ; Stuck at GND due to stuck port data_in ;
-; uart:u2|tx8bit[0]                      ; Merged with uart:u2|tx8bit[1]          ;
-; uart:u2|tx8bit[1]                      ; Merged with uart:u2|tx8bit[2]          ;
-; uart:u2|tx8bit[2]                      ; Merged with uart:u2|tx8bit[3]          ;
-; uart:u2|tx8bit[3]                      ; Merged with uart:u2|tx8bit[4]          ;
-; uart:u2|tx8bit[4]                      ; Merged with uart:u2|tx8bit[5]          ;
-; uart:u2|tx8bit[5]                      ; Merged with uart:u2|tx8bit[6]          ;
 ; uart:u2|LEDRX[1..7]                    ; Merged with uart:u2|LEDRX[0]           ;
+; uart:u2|yaxis[0..15]                   ; Lost fanout                            ;
+; uart:u2|rx8bit[3..7]                   ; Lost fanout                            ;
 ; uart:u2|LEDRX[0]                       ; Stuck at VCC due to stuck port data_in ;
-; Total Number of Removed Registers = 18 ;                                        ;
+; data_for_ram[1..31]                    ; Merged with data_for_ram[0]            ;
+; Total Number of Removed Registers = 63 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -356,6 +304,11 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------+---------------------------+-----------------------------------------------------+
 ; VGA_Controller:v2|addr[19] ; Stuck at GND              ; addr_for_ram_read[19], SRAM:rm|BASERAMADDR[19]~reg0 ;
 ;                            ; due to stuck port data_in ;                                                     ;
+; uart:u2|yaxis[3]           ; Lost Fanouts              ; uart:u2|rx8bit[3]                                   ;
+; uart:u2|yaxis[4]           ; Lost Fanouts              ; uart:u2|rx8bit[4]                                   ;
+; uart:u2|yaxis[5]           ; Lost Fanouts              ; uart:u2|rx8bit[5]                                   ;
+; uart:u2|yaxis[6]           ; Lost Fanouts              ; uart:u2|rx8bit[6]                                   ;
+; uart:u2|yaxis[7]           ; Lost Fanouts              ; uart:u2|rx8bit[7]                                   ;
 +----------------------------+---------------------------+-----------------------------------------------------+
 
 
@@ -364,34 +317,28 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 295   ;
+; Total registers                              ; 237   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 90    ;
+; Number of registers using Asynchronous Clear ; 79    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 212   ;
+; Number of registers using Clock Enable       ; 165   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------+
-; Inverted Register Statistics                      ;
-+-----------------------------------------+---------+
-; Inverted Register                       ; Fan out ;
-+-----------------------------------------+---------+
-; VGA_Controller:v2|hst                   ; 10      ;
-; VGA_Controller:v2|vst                   ; 10      ;
-; uart:u2|tx8bit[6]                       ; 1       ;
-; uart:u2|rx8bit[0]                       ; 4       ;
-; uart:u2|rx8bit[2]                       ; 4       ;
-; uart:u2|rx8bit[1]                       ; 4       ;
-; uart:u2|rx8bit[3]                       ; 3       ;
-; uart:u2|rx8bit[4]                       ; 3       ;
-; uart:u2|rx8bit[5]                       ; 3       ;
-; uart:u2|rx8bit[6]                       ; 3       ;
-; uart:u2|rx8bit[7]                       ; 3       ;
-; Total number of inverted registers = 11 ;         ;
-+-----------------------------------------+---------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; VGA_Controller:v2|hst                  ; 10      ;
+; VGA_Controller:v2|vst                  ; 10      ;
+; uart:u2|rx8bit[0]                      ; 2       ;
+; uart:u2|rx8bit[1]                      ; 2       ;
+; uart:u2|rx8bit[2]                      ; 2       ;
+; Total number of inverted registers = 5 ;         ;
++----------------------------------------+---------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------+
@@ -400,12 +347,9 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output   ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
 ; 3:1                ; 3 bits    ; 6 LEs         ; 0 LEs                ; 6 LEs                  ; Yes        ; |top|uart:u2|gesture[2]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |top|uart:u2|yaxis[3]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |top|uart:u2|yaxis[15]       ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |top|VGA_Controller:v2|rt[0] ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |top|uart:u2|reccnt[1]       ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |top|VGA_Controller:v2|gt[0] ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |top|uart:u2|reccnt[2]       ;
 ; 17:1               ; 4 bits    ; 44 LEs        ; 24 LEs               ; 20 LEs                 ; Yes        ; |top|uart:u2|cnt2[1]         ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |top|uart:u2|tempData        ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
 
 
@@ -433,7 +377,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Fri May 24 11:16:29 2019
+    Info: Processing started: Fri May 24 12:06:52 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top -c top
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file top.vhd
@@ -452,285 +396,96 @@ Info (12021): Found 2 design units, including 1 entities, in source file sram.vh
     Info (12022): Found design unit 1: SRAM-beh
     Info (12023): Found entity 1: SRAM
 Info (12127): Elaborating entity "top" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at top.vhd(16): used implicit default value for signal "RAMDATA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at top.vhd(17): used implicit default value for signal "from_uart_data" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at top.vhd(18): used implicit default value for signal "from_uart_addr" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at top.vhd(38): object "uart_clk" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at top.vhd(35): object "uart_clk" assigned a value but never read
 Info (12128): Elaborating entity "VGA_Controller" for hierarchy "VGA_Controller:v2"
 Info (12128): Elaborating entity "VGActSRAM" for hierarchy "VGActSRAM:vtran"
 Info (12128): Elaborating entity "uart" for hierarchy "uart:u2"
-Warning (10036): Verilog HDL or VHDL warning at uart.vhd(39): object "pre_xaxis" assigned a value but never read
-Warning (10492): VHDL Process Statement warning at uart.vhd(71): signal "uart_clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(87): signal "uart_clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(121): signal "uart_clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(182): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(187): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(190): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(191): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(191): signal "pre_yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(195): signal "xaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(196): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(198): signal "xaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at uart.vhd(198): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10631): VHDL Process Statement warning at uart.vhd(177): inferring latch(es) for signal or variable "draw", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at uart.vhd(177): inferring latch(es) for signal or variable "tempData", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at uart.vhd(177): inferring latch(es) for signal or variable "pre_yaxis", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at uart.vhd(177): inferring latch(es) for signal or variable "RamData", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at uart.vhd(177): inferring latch(es) for signal or variable "RamAddr", which holds its previous value in one or more paths through the process
-Info (10041): Inferred latch for "RamAddr[0]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[1]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[2]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[3]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[4]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[5]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[6]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[7]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[8]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[9]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[10]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[11]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[12]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[13]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[14]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[15]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[16]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[17]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[18]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamAddr[19]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[0]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[1]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[2]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[3]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[4]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[5]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[6]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[7]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[8]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[9]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[10]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[11]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[12]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[13]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[14]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[15]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[16]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[17]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[18]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[19]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[20]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[21]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[22]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[23]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[24]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[25]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[26]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[27]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[28]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[29]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[30]" at uart.vhd(177)
-Info (10041): Inferred latch for "RamData[31]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[0]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[1]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[2]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[3]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[4]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[5]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[6]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[7]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[8]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[9]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[10]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[11]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[12]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[13]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[14]" at uart.vhd(177)
-Info (10041): Inferred latch for "pre_yaxis[15]" at uart.vhd(177)
-Info (10041): Inferred latch for "draw" at uart.vhd(177)
-Info (10041): Inferred latch for "tempData[0]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[1]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[2]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[3]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[4]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[5]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[6]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[7]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[8]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[9]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[10]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[11]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[12]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[13]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[14]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[15]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[16]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[17]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[18]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[19]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[20]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[21]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[22]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[23]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[24]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[25]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[26]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[27]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[28]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[29]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[30]" at uart.vhd(181)
-Info (10041): Inferred latch for "tempData[31]" at uart.vhd(181)
+Warning (10541): VHDL Signal Declaration warning at uart.vhd(13): used implicit default value for signal "tx" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10492): VHDL Process Statement warning at uart.vhd(70): signal "uart_clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(79): signal "uart_clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(138): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(143): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(146): signal "gesture" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(147): signal "tempData" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(147): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(147): signal "pre_yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at uart.vhd(135): inferring latch(es) for signal or variable "draw", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at uart.vhd(135): inferring latch(es) for signal or variable "tempData", which holds its previous value in one or more paths through the process
+Warning (10492): VHDL Process Statement warning at uart.vhd(159): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(161): signal "xaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at uart.vhd(161): signal "yaxis" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (10041): Inferred latch for "tempData[0]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[1]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[2]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[3]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[4]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[5]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[6]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[7]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[8]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[9]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[10]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[11]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[12]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[13]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[14]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[15]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[16]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[17]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[18]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[19]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[20]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[21]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[22]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[23]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[24]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[25]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[26]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[27]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[28]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[29]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[30]" at uart.vhd(135)
+Info (10041): Inferred latch for "tempData[31]" at uart.vhd(135)
+Info (10041): Inferred latch for "draw" at uart.vhd(135)
 Info (12128): Elaborating entity "SRAM" for hierarchy "SRAM:rm"
-Warning (10036): Verilog HDL or VHDL warning at SRAM.vhd(30): object "in_addr" assigned a value but never read
+Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[31]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[30]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[29]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[28]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[27]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[26]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[25]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[24]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[23]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[22]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[21]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[20]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[19]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[18]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[17]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[16]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[15]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[14]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[13]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[12]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[11]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[10]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[9]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[8]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[7]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[6]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[5]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[4]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[3]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[2]" merged with LATCH primitive "uart:u2|tempData[0]"
+    Info (13026): Duplicate LATCH primitive "uart:u2|tempData[1]" merged with LATCH primitive "uart:u2|tempData[0]"
 Warning (13012): Latch uart:u2|tempData[0] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[1] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[2] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[3] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[4] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[5] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[6] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[7] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[8] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[9] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[10] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[11] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[12] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[13] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[14] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[15] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[16] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[17] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[18] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[19] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[20] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[21] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[22] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[23] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[24] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[25] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[26] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[27] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[28] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[29] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[30] has unsafe behavior
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
-Warning (13012): Latch uart:u2|tempData[31] has unsafe behavior
     Warning (13013): Ports D and ENA on the latch are fed by the same signal uart:u2|gesture[1]
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "RAMDATA[0]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[1]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[2]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[3]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[4]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[5]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[6]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[7]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[8]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[9]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[10]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[11]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[12]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[13]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[14]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[15]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[16]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[17]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[18]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[19]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[20]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[21]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[22]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[23]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[24]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[25]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[26]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[27]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[28]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[29]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[30]" is stuck at GND
-    Warning (13410): Pin "RAMDATA[31]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[0]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[1]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[2]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[3]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[4]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[5]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[6]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[7]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[8]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[9]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[10]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[11]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[12]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[13]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[14]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[15]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[16]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[17]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[18]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[19]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[20]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[21]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[22]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[23]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[24]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[25]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[26]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[27]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[28]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[29]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[30]" is stuck at GND
-    Warning (13410): Pin "from_uart_data[31]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[0]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[1]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[2]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[3]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[4]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[5]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[6]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[7]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[8]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[9]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[10]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[11]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[12]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[13]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[14]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[15]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[16]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[17]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[18]" is stuck at GND
-    Warning (13410): Pin "from_uart_addr[19]" is stuck at GND
+    Warning (13410): Pin "tx" is stuck at GND
     Warning (13410): Pin "LEDRX[0]" is stuck at VCC
     Warning (13410): Pin "LEDRX[1]" is stuck at VCC
     Warning (13410): Pin "LEDRX[2]" is stuck at VCC
@@ -739,16 +494,17 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDRX[5]" is stuck at VCC
     Warning (13410): Pin "LEDRX[6]" is stuck at VCC
     Warning (13410): Pin "LEDRX[7]" is stuck at VCC
+Info (17049): 21 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 728 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 380 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 4 input pins
-    Info (21059): Implemented 127 output pins
+    Info (21059): Implemented 43 output pins
     Info (21060): Implemented 32 bidirectional pins
-    Info (21061): Implemented 565 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 180 warnings
-    Info: Peak virtual memory: 4670 megabytes
-    Info: Processing ended: Fri May 24 11:16:31 2019
+    Info (21061): Implemented 301 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 27 warnings
+    Info: Peak virtual memory: 4683 megabytes
+    Info: Processing ended: Fri May 24 12:06:54 2019
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

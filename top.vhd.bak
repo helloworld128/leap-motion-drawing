@@ -13,8 +13,11 @@ entity top is
         ored : out std_logic_vector(2 downto 0);
         oblue: out std_logic_vector(2 downto 0);
         ogreen: out std_logic_vector(2 downto 0);
-        LEDRX: out std_logic_vector(7 downto 0);
-		  WE  : out std_logic;
+		RAMDATA : out std_logic_vector(31 downto 0);
+		from_uart_data: out std_logic_vector(31 downto 0);
+		from_uart_addr: out std_logic_vector(19 downto 0);
+        LEDRX: out std_logic_vector(7 downto 0);--闂傚倸鍊搁崐宄懊归崶顒婄稏濠㈣泛顑囬々鎻捗归悩宸剰缁炬儳娼￠弻锛勪沪鐠囨彃濮庨梺鍝勵儎閼冲墎妲愰幒鎴旀婵☆垳顭堟禍鍫曟⒒閸屾艾鈧嘲霉閸パ屾禆闁靛ň鏅滈崵鍕煠缁嬭法浠涙繛鍛У娣囧﹪濡堕崒姘闂備椒绱徊浠嬫倶濮樿京绠旈柣鏃傚帶閻掑灚銇勯幒鍡椾壕濡炪倖娲╃徊鍓р偓闈涖偢瀵爼骞嬮悪鈧Σ鍫曟煟閻斿摜鐭婃い鎴濇缁骞掗幋鏃€顫嶉梺闈涢獜缁辨洟宕㈤柆宥嗏拺闁革富鍘奸崝瀣煛鐏炶濮傞柕鍡楀€圭缓浠嬪川婵犲嫬骞愰梻浣虹《閸撴繈鎮烽妷鈺佸嚑婵炴垯鍨洪悡娆愩亜閺嶃劍鐨戦弽锟犳⒑閻熸澘妲婚柟鍐茬箳缁參鎮㈢喊杈ㄦ櫖濠殿喗锕╅崢濂稿焵
+        WE  : out std_logic;
         OE  : out std_logic;
         CE  : out std_logic;
         addr_sram   : out std_logic_vector(19 downto 0);
@@ -75,11 +78,11 @@ architecture bha of top is
 
     component uart is
         port(
-            clk : in std_logic; --100MHz
+            clk : in std_logic; --100MHz闂傚倸鍊搁崐椋庣矆娓氣偓楠炴牠顢曢敃鈧悿顔姐亜閹板爼妾柛瀣槸閳规垿宕掑搴ｅ姼缂
             rst : in std_logic;
             rx : in std_logic;
         ---  to delete
-            LEDRX: out std_logic_vector(7 downto 0);--
+            LEDRX: out std_logic_vector(7 downto 0);--闂傚倸鍊搁崐宄懊归崶顒婄稏濠㈣泛顑囬々鎻捗归悩宸剰缁炬儳娼￠弻锛勪沪鐠囨彃濮庨梺鍝勵儎閼冲墎妲愰幒鎴旀婵☆垳顭堟禍鍫曟⒒閸屾艾鈧嘲霉閸パ屾禆闁靛ň鏅滈崵鍕煠缁嬭法浠涙繛鍛У娣囧﹪濡堕崒姘闂備椒绱徊浠嬫倶濮樿京绠旈柣鏃傚帶閻掑灚銇勯幒鍡椾壕濡炪倖娲╃徊鍓р偓闈涖偢瀵爼骞嬮悪鈧Σ鍫曟煟閻斿摜鐭婃い鎴濇缁骞掗幋鏃€顫嶉梺闈涢獜缁辨洟宕㈤柆宥嗏拺闁革富鍘奸崝瀣煛鐏炶濮傞柕鍡楀€圭缓浠嬪川婵犲嫬骞愰梻浣虹《閸撴繈鎮烽妷鈺佸嚑婵炴垯鍨洪悡娆愩亜閺嶃劍鐨戦弽锟犳⒑閻熸澘妲婚柟鍐茬箳缁參鎮㈢喊杈ㄦ櫖濠殿喗锕╅崢濂稿焵
             tx : out std_logic;
             RamAddr	: out std_logic_vector(19 downto 0);
             RamData	: out std_logic_vector(31 downto 0);
