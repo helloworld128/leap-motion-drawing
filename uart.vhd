@@ -36,7 +36,7 @@ signal xaxis  : std_logic_vector(15 downto 0);
 signal yaxis  : std_logic_vector(15 downto 0);
 --signal pre_xaxis : std_logic_vector(15 downto 0) := (others=>'0'); 
 signal pre_yaxis : std_logic_vector(15 downto 0) := (others=>'0');
-constant xy_sub : std_logic_vector(15 downto 0) := "0000000000000000";
+-- constant xy_sub : std_logic_vector(15 downto 0) := "0000000000000000";
 signal gesture : std_logic_vector(7 downto 0);
 signal tempData : std_logic_vector(31 downto 0) := (others=>'1');
 
@@ -132,6 +132,34 @@ begin
 end process;
 --
 
+
+--gesture: 0 - draw  1 -clean  2 - color
+--gesture(0): 0 - not draw ; 1- draw;
+--gesture(1): 0 - clean ;  1 - not clean
+--gesture(2): 0 - keep color   1- change color
+
+-- process(reccnt)
+-- begin
+-- 	if(reccnt = 0) then
+-- 		if(gesture(0) = '0') then
+-- 			draw <= '0';
+-- 		else
+-- 			draw <= '1';
+-- 		end if;
+-- 		if (gesture(1) = '0') then
+-- 			tempData <= (others=>'1');
+-- 		else
+-- 			if(gesture(2) = '1') then
+-- 				if(tempData(15 downto 0) + yaxis - pre_yaxis > "111111111111111") then
+-- 					tempData <= (others=>'1');
+-- 				else
+-- 					tempData <=  (others=>'0');
+-- 				end if;
+-- 			end if;
+-- 		end if;
+-- 	end if;
+-- end process;
+
 process(reccnt)
 begin
 	if(reccnt = 0) then
@@ -140,19 +168,17 @@ begin
 		else
 			draw <= '1';
 		end if;
-		if (gesture(1) = '0') then
+		if(gesture(1) = '0') then
 			tempData <= (others=>'1');
 		else
 			if(gesture(2) = '1') then
-				if(tempData(15 downto 0) + yaxis - pre_yaxis > "111111111111111") then
-					tempData <= (others=>'1');
-				else
-					tempData <=  (others=>'0');
-				end if;
-			end if;
+				tempData(8 downto 0) <= "000111101";
+			end if; 
 		end if;
 	end if;
-end process;
+			end process;
+		
+
 
 process(tempData)
 begin
