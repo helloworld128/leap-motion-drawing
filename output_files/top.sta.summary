@@ -2,73 +2,65 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow Model Setup 'uart:u2|reccnt[0]'
+Slack : -7.618
+TNS   : -10.278
+
 Type  : Slow Model Setup 'uart:u2|uart_clk'
-Slack : -4.626
-TNS   : -35.366
+Slack : -4.656
+TNS   : -114.244
 
 Type  : Slow Model Setup 'VGA_Controller:v2|CLK_4'
-Slack : -4.212
-TNS   : -161.852
-
-Type  : Slow Model Setup 'VGA_Controller:v2|VGA_CLK'
-Slack : -3.808
-TNS   : -83.081
-
-Type  : Slow Model Setup 'uart:u2|reccnt[0]'
-Slack : -3.241
-TNS   : -3.241
+Slack : -4.373
+TNS   : -166.482
 
 Type  : Slow Model Setup 'clk11'
-Slack : -2.381
-TNS   : -17.098
+Slack : -2.387
+TNS   : -17.687
 
 Type  : Slow Model Setup 'clk100'
-Slack : -1.800
-TNS   : -171.190
+Slack : -2.101
+TNS   : -167.552
 
-Type  : Slow Model Setup 'uart:u2|gesture[1]'
-Slack : -0.178
-TNS   : -0.178
+Type  : Slow Model Setup 'VGA_Controller:v2|VGA_CLK'
+Slack : -1.298
+TNS   : -10.636
 
 Type  : Slow Model Setup 'VGA_Controller:v2|CLK_2'
-Slack : 2.542
+Slack : 2.680
 TNS   : 0.000
 
 Type  : Slow Model Hold 'uart:u2|uart_clk'
-Slack : -3.746
-TNS   : -6.307
+Slack : -3.587
+TNS   : -7.077
 
 Type  : Slow Model Hold 'clk100'
-Slack : -3.135
-TNS   : -3.135
+Slack : -3.180
+TNS   : -5.176
 
 Type  : Slow Model Hold 'VGA_Controller:v2|CLK_2'
-Slack : -2.708
-TNS   : -5.016
+Slack : -2.689
+TNS   : -5.135
 
 Type  : Slow Model Hold 'uart:u2|reccnt[0]'
-Slack : -2.155
-TNS   : -2.155
-
-Type  : Slow Model Hold 'uart:u2|gesture[1]'
-Slack : -0.741
-TNS   : -0.741
-
-Type  : Slow Model Hold 'VGA_Controller:v2|VGA_CLK'
-Slack : -0.247
-TNS   : -0.247
+Slack : 0.486
+TNS   : 0.000
 
 Type  : Slow Model Hold 'VGA_Controller:v2|CLK_4'
 Slack : 0.499
 TNS   : 0.000
 
 Type  : Slow Model Hold 'clk11'
-Slack : 1.181
+Slack : 1.177
+TNS   : 0.000
+
+Type  : Slow Model Hold 'VGA_Controller:v2|VGA_CLK'
+Slack : 1.872
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'clk100'
 Slack : -1.941
-TNS   : -180.021
+TNS   : -191.893
 
 Type  : Slow Model Minimum Pulse Width 'clk11'
 Slack : -1.941
@@ -78,93 +70,81 @@ Type  : Slow Model Minimum Pulse Width 'VGA_Controller:v2|CLK_4'
 Slack : -0.742
 TNS   : -75.684
 
-Type  : Slow Model Minimum Pulse Width 'VGA_Controller:v2|VGA_CLK'
-Slack : -0.742
-TNS   : -57.876
-
 Type  : Slow Model Minimum Pulse Width 'uart:u2|uart_clk'
 Slack : -0.742
-TNS   : -19.292
+TNS   : -50.456
+
+Type  : Slow Model Minimum Pulse Width 'VGA_Controller:v2|VGA_CLK'
+Slack : -0.742
+TNS   : -13.356
 
 Type  : Slow Model Minimum Pulse Width 'VGA_Controller:v2|CLK_2'
 Slack : -0.742
 TNS   : -2.968
 
-Type  : Slow Model Minimum Pulse Width 'uart:u2|gesture[1]'
-Slack : 0.500
-TNS   : 0.000
-
 Type  : Slow Model Minimum Pulse Width 'uart:u2|reccnt[0]'
 Slack : 0.500
 TNS   : 0.000
 
-Type  : Fast Model Setup 'uart:u2|uart_clk'
-Slack : -1.407
-TNS   : -4.693
-
 Type  : Fast Model Setup 'uart:u2|reccnt[0]'
-Slack : -0.947
-TNS   : -0.947
+Slack : -2.411
+TNS   : -3.208
+
+Type  : Fast Model Setup 'uart:u2|uart_clk'
+Slack : -1.436
+TNS   : -18.088
 
 Type  : Fast Model Setup 'VGA_Controller:v2|CLK_4'
-Slack : -0.720
-TNS   : -21.836
-
-Type  : Fast Model Setup 'VGA_Controller:v2|VGA_CLK'
-Slack : -0.598
-TNS   : -9.039
+Slack : -0.813
+TNS   : -24.988
 
 Type  : Fast Model Setup 'clk11'
-Slack : -0.164
-TNS   : -0.301
+Slack : -0.170
+TNS   : -0.271
 
 Type  : Fast Model Setup 'clk100'
-Slack : -0.011
-TNS   : -0.260
+Slack : -0.088
+TNS   : -1.142
 
-Type  : Fast Model Setup 'uart:u2|gesture[1]'
-Slack : 0.306
+Type  : Fast Model Setup 'VGA_Controller:v2|VGA_CLK'
+Slack : 0.058
 TNS   : 0.000
 
 Type  : Fast Model Setup 'VGA_Controller:v2|CLK_2'
-Slack : 1.708
+Slack : 1.790
 TNS   : 0.000
 
-Type  : Fast Model Hold 'uart:u2|uart_clk'
-Slack : -1.747
-TNS   : -3.993
-
 Type  : Fast Model Hold 'clk100'
-Slack : -1.711
-TNS   : -1.719
+Slack : -1.752
+TNS   : -23.564
+
+Type  : Fast Model Hold 'uart:u2|uart_clk'
+Slack : -1.726
+TNS   : -13.101
 
 Type  : Fast Model Hold 'VGA_Controller:v2|CLK_2'
-Slack : -1.437
-TNS   : -2.765
-
-Type  : Fast Model Hold 'VGA_Controller:v2|VGA_CLK'
-Slack : -0.737
-TNS   : -1.427
-
-Type  : Fast Model Hold 'uart:u2|reccnt[0]'
-Slack : -0.629
-TNS   : -0.629
-
-Type  : Fast Model Hold 'uart:u2|gesture[1]'
-Slack : -0.213
-TNS   : -0.213
+Slack : -1.434
+TNS   : -2.844
 
 Type  : Fast Model Hold 'VGA_Controller:v2|CLK_4'
 Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Hold 'clk11'
-Slack : 0.363
+Slack : 0.362
+TNS   : 0.000
+
+Type  : Fast Model Hold 'uart:u2|reccnt[0]'
+Slack : 0.405
+TNS   : 0.000
+
+Type  : Fast Model Hold 'VGA_Controller:v2|VGA_CLK'
+Slack : 0.733
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'clk100'
 Slack : -1.380
-TNS   : -121.380
+TNS   : -129.380
 
 Type  : Fast Model Minimum Pulse Width 'clk11'
 Slack : -1.380
@@ -174,21 +154,17 @@ Type  : Fast Model Minimum Pulse Width 'VGA_Controller:v2|CLK_4'
 Slack : -0.500
 TNS   : -51.000
 
-Type  : Fast Model Minimum Pulse Width 'VGA_Controller:v2|VGA_CLK'
-Slack : -0.500
-TNS   : -39.000
-
 Type  : Fast Model Minimum Pulse Width 'uart:u2|uart_clk'
 Slack : -0.500
-TNS   : -13.000
+TNS   : -34.000
+
+Type  : Fast Model Minimum Pulse Width 'VGA_Controller:v2|VGA_CLK'
+Slack : -0.500
+TNS   : -9.000
 
 Type  : Fast Model Minimum Pulse Width 'VGA_Controller:v2|CLK_2'
 Slack : -0.500
 TNS   : -2.000
-
-Type  : Fast Model Minimum Pulse Width 'uart:u2|gesture[1]'
-Slack : 0.500
-TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'uart:u2|reccnt[0]'
 Slack : 0.500

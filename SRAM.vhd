@@ -12,7 +12,7 @@ port(
     mode    : in std_logic_vector(1 downto 0);
     addr_read : in std_logic_vector(19 downto 0);
     addr_write: in std_logic_vector(19 downto 0);
-	 data_in : in std_logic_vector(31 downto 0);
+	data_in : in std_logic_vector(31 downto 0);
     rwdata : out std_logic_vector(31 downto 0);
 --- memory 	to CFPGA
 	BASERAMWE           : out std_logic;   --write                    

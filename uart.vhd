@@ -144,7 +144,7 @@ begin
 			tempData <= (others=>'1');
 		else
 			if(gesture(2) = '1') then
-				if(tempData + yaxis - pre_yaxis > "11111111111111111111111111111111") then
+				if(tempData(15 downto 0) + yaxis - pre_yaxis > "111111111111111") then
 					tempData <= (others=>'1');
 				else
 					tempData <=  (others=>'0');

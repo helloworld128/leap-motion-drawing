@@ -31,7 +31,7 @@ architecture bha of top is
     signal Uart_RAM_addr: std_logic_vector(19 downto 0);
     signal RAM_to_VGA_data  : std_logic_vector(31 downto 0);
     signal Uart_to_RAM_data : std_logic_vector(31 downto 0); 
-	 signal bufferdata : std_logic_vector(31 downto 0);
+	 signal bufferdata : std_logic_vector(31 downto 0); -- read from sram , to vga_trans
     signal uart_clk : std_logic := '0';
     signal vga_clk : std_logic := '0';
     signal rwmode : std_logic_vector(1 downto 0) := "00";
@@ -39,11 +39,10 @@ architecture bha of top is
     signal addr_for_ram_write : std_logic_vector(19 downto 0);
     signal data_for_ram : std_logic_vector(31 downto 0);
     signal cnt: integer range 0 to 250 := 0;
-	 
-	type rwstate is (idle, readram, writeram, rwend);
-    signal stat : rwstate := idle;
-    signal draw_uart : std_logic := '1';
-     
+    signal draw_uart : std_logic := '0';
+
+    signal button1_r : std_logic_vector(2 downto 0);
+    signal button2_r : std_logic_vector(2 downto 0);     
     
     component VGA_Controller is
         port(
@@ -112,84 +111,58 @@ architecture bha of top is
 	begin
 		v2:VGA_Controller port map(CLK_in=>clk100, reset=>rst, hs=>hso, vs=>vso, oRed=>ored, oGreen=>ogreen, oBlue=>oblue, R=>midRed, G=>midGreen, B=>midBlue, addr=>VGA_RAM_addr, VGA_CLK=>vga_clk);
         vtran:VGActSRAM port map(clk=>vga_clk, rst=>rst, vR=>midRed, vG=>midGreen, vB=>midBlue, RAMdata=>bufferdata);
-        -- ra:ramsin port map(data=>Uart_to_RAM_data, rdaddress=>VGA_RAM_addr, rdclock=>vga_clk, wraddress=> Uart_RAM_addr, wrclock=>uart_clk, wren=>'0', q=>bufferdata);
 		u2:uart port map(clk=>clk11,rst=>rst, rx=>rx, tx=>tx, LEDRX=>LEDRX ,RamAddr=>Uart_RAM_addr, RamData=>Uart_to_RAM_data, uart_clk_out=>uart_clk,draw=>draw_uart);
-		--LEDRX<="11111111";
-        rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>addr_for_ram_read, addr_write=>addr_for_ram_write,data_in=>data_for_ram, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
+        -- rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>addr_for_ram_read, addr_write=>addr_for_ram_write,data_in=>data_for_ram, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
 
-	-- process(uart_clk)
-	-- begin
-	-- 	if(uart_clk'event and uart_clk = '1') then
-	-- 		RAMDATA <= bufferdata;
-	-- 		from_uart_data <= Uart_to_RAM_data;
-	-- 		from_uart_addr <= Uart_RAM_addr;
-	-- 		--LEDRX <= bufferdata(7 downto 0);
-	-- 	end if;
-    -- end process;
-    
-    -- process(uart_clk, vga_clk)
-    -- begin
-    --     if(uart_clk'event and uart_clk = '1') then
-    --         rwmode <= "10";
-    --         addr_for_ram_read <= Uart_RAM_addr;
-    --         data_for_ram <= Uart_to_RAM_data;
-    --     -- elsif (vga_clk'event and vga_clk = '1') then
-    --     --     rwmode <= "01";
-    --     --     addr_for_ram_read <= VGA_RAM_addr;
-    --     else
-    --         rwmode <= "00";
-    --         -- addr_for_ram_read <= VGA_RAM_addr;
-    --     end if;
-    -- end process;
+        rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>VGA_RAM_addr, addr_write=>Uart_RAM_addr,data_in=>Uart_to_RAM_data, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
 
 
-    -- process(clk100, uart_clk)
-    -- begin
-    --     if(clk100'event and clk100='1') then
-    --         if (cnt = 900) then
-    --             rwmode <= "10";
-    --             addr_for_ram_read <= Uart_RAM_addr;
-    --             data_for_ram <= Uart_to_RAM_data;
-    --             cnt <= 0;
-    --         else
-    --             rwmode <= "01"; 
-    --             addr_for_ram_read <= VGA_RAM_addr;
-    --             cnt <= cnt + 1;
-    --         end if;
-    --     end if;
-    -- end process ;
-                
-
-    -- process(uart_clk,vga_clk)
-    -- begin
-    --     if(uart_clk'event and uart_clk = '1') then
-    --         cnt <= 1;
-    --     end if;
-    -- end process;
-    
-    process(vga_clk)
+    process(clk100)
     begin
-        if(vga_clk'event and vga_clk = '1') then
-            cnt <= cnt + 1;
-        end if;
-        end process;
+        if rising_edge(clk100) then
+            -- Shift the value of button in button_r
+            -- The LSB is unused and is there solely for metastability
+            button1_r <= button1_r(button1_r'left-1 downto 0) & uart_clk;
+            button2_r <= button2_r(button2_r'left-1 downto 0) & vga_clk;
 
-    process(vga_clk)
-    begin
-        if(vga_clk'event and vga_clk = '1') then
-            if(cnt = 250) then
-                if(draw_uart = '1') then
-                    rwmode <= "10";
-                    addr_for_ram_write <= Uart_RAM_addr;
-                    data_for_ram <= Uart_to_RAM_data;
-                else
+            if button1_r(button1_r'left downto button1_r'left-1) = "01" then -- Button1 rising
+                if draw_uart = '0' then
                     rwmode <= "01";
+                else
+                    rwmode <= "10";
                 end if;
-            else
-                rwmode <= "01"; 
-                addr_for_ram_read <= VGA_RAM_addr;
+                -- addr_for_ram_write <= Uart_RAM_addr;
+                -- data_for_ram <= Uart_to_RAM_data;
+            elsif button2_r(button2_r'left downto button2_r'left-1) = "01" then -- Button2 rising
+                rwmode <= "01";
+                -- addr_for_ram_read <= VGA_RAM_addr;
             end if;
         end if;
     end process;
+    
+    -- process(vga_clk)
+    -- begin
+    --     if(vga_clk'event and vga_clk = '1') then
+    --         cnt <= cnt + 1;
+    --     end if;
+    --     end process;
+
+    -- process(vga_clk)
+    -- begin
+    --     if(vga_clk'event and vga_clk = '1') then
+    --         if(cnt = 250) then
+    --             if(draw_uart = '1') then
+    --                 rwmode <= "10";
+    --                 addr_for_ram_write <= Uart_RAM_addr;
+    --                 data_for_ram <= Uart_to_RAM_data;
+    --             else
+    --                 rwmode <= "01";
+    --             end if;
+    --         else
+    --             rwmode <= "01"; 
+    --             addr_for_ram_read <= VGA_RAM_addr;
+    --         end if;
+    --     end if;
+    -- end process;
 
 end architecture bha;
