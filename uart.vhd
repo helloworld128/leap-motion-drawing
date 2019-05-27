@@ -5,11 +5,11 @@ use ieee.std_logic_arith.all;
 
 entity uart is
 	port(
-				clk : in std_logic; --11MHz鏃堕挓
+				clk : in std_logic; --11MHz
 				rst : in std_logic;
 				rx : in std_logic;
 			---  to delete
-				LEDRX: out std_logic_vector(7 downto 0);--鎺ユ敹RX鏁版嵁鏄剧ず鍒版暟鐮佺
+				LEDRX: out std_logic_vector(7 downto 0);--
 				tx : out std_logic;
 				RamAddr	: out std_logic_vector(19 downto 0);
 				RamData	: out std_logic_vector(31 downto 0);
@@ -27,7 +27,7 @@ signal cnt:integer range 0 to 1151 := 0;
 signal uart_clk:std_logic;
 signal rx8bit:std_logic_vector(7 downto 0);
 signal cnt2   : integer range 0 to 9;
-signal reccnt : integer range 0 to 5;
+signal reccnt : integer range 0 to 5 :=0;
 -- signal xaxis  : std_logic_vector(9 downto 0) ;
 -- signal yaxis  : std_logic_vector(9 downto 0) ;
 -- signal tempdata : std_logic_vector(31 downto 0) ;
@@ -41,13 +41,14 @@ signal gesture : std_logic_vector(7 downto 0);
 signal tempData : std_logic_vector(31 downto 0) := (others=>'1');
 
 begin 
-------------------------------------------娉㈢壒鐜囧彂鐢熷櫒
+------------------------------------------
+uart_clk_out <= uart_clk;
 
 bps:process(rst,clk)
 begin
 						if rst='0' then 
 							cnt<=0;
-						elsif (clk'event and clk='1')    then		--鏃堕挓璁℃暟鍣
+						elsif (clk'event and clk='1')    then		
 								if cnt = 1151  then 
 									cnt<=0;
 								else
@@ -62,17 +63,16 @@ begin
 					uart_clk<='0';
 				elsif  clk'event and clk='1' then 	
 						if (cnt=1151) then
-						uart_clk<='1';	--娉㈢壒鐜囬珮鐢靛钩
+						uart_clk<='1';	
 						else
-						uart_clk<='0';	--娉㈢壒鐜囦綆鐢靛钩
+						uart_clk<='0';	
 						end if;
 				end if;
-				uart_clk_out <= uart_clk;
 end process;
 -------------------------------------------
 
---------------------------------------------鎺ユ敹鏁版嵁鐘舵€佹満
-process(rst,clk)
+--------------------------------------------
+process(rst,uart_clk)
 begin 
 	if rst='0' then 
 		rx8bit<=(others=>'1');
@@ -126,7 +126,7 @@ begin
 								
 								
 			when others=> cnt2<=0;
-							 LEDRX <= "11111111";
+
 		end case ;
 	end if ;
 end process;
@@ -160,31 +160,36 @@ end process;
 -- 	end if;
 -- end process;
 
-process(reccnt)
+process(uart_clk)
 begin
-	if(reccnt = 0) then
-		if(gesture(0) = '0') then
-			draw <= '0';
-		else
-			draw <= '1';
-		end if;
-		if(gesture(1) = '0') then
-			tempData <= (others=>'1');
-		else
-			if(gesture(2) = '1') then
-				tempData(8 downto 0) <= "000111101";
-			end if; 
+	if rising_edge(uart_clk) then
+		if(reccnt = 0) then
+			if(gesture(0) = '0') then
+				draw <= '0';
+			else
+				draw <= '1';
+			end if;
+			if(gesture(1) = '0') then
+				tempData <= (others=>'1');
+			else
+				if(gesture(2) = '1') then
+					tempData(8 downto 0) <= "000111101";
+				end if; 
+			end if;
 		end if;
 	end if;
-			end process;
+end process;
 		
 
 
-process(tempData)
+process(uart_clk)
 begin
+	if(rising_edge(uart_clk)) then
 		pre_yaxis <= yaxis; 
 		RamData <= tempData;
 		RamAddr <= "0" & xaxis(9 downto 0) & yaxis(8 downto 0); 
+		LEDRX <= yaxis(7 downto 0);
+	end if;
 end process;
 
 end bev;
