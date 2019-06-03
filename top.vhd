@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity top is
+	entity top is
     port(
         clk11 : in std_logic;
         rst : in std_logic;
@@ -13,12 +13,12 @@ entity top is
         ored : out std_logic_vector(2 downto 0);
         oblue: out std_logic_vector(2 downto 0);
         ogreen: out std_logic_vector(2 downto 0);
-        LEDRX: out std_logic_vector(7 downto 0);
-		  WE  : out std_logic;
+		WE  : out std_logic;
         OE  : out std_logic;
         CE  : out std_logic;
         addr_sram   : out std_logic_vector(19 downto 0);
-        data_sram   : inout std_logic_vector(31 downto 0)
+        data_sram   : inout std_logic_vector(31 downto 0);
+		  lightout : out std_logic_vector(31 downto 0)
     );
 end entity top;
 
@@ -42,7 +42,7 @@ architecture bha of top is
     signal draw_uart : std_logic := '0';
 
     signal button1_r : std_logic_vector(2 downto 0);
-    signal button2_r : std_logic_vector(2 downto 0);     
+    signal button2_r : std_logic_vector(2 downto 0);   
     
     component VGA_Controller is
         port(
@@ -78,7 +78,6 @@ architecture bha of top is
             rst : in std_logic;
             rx : in std_logic;
         ---  to delete
-            LEDRX: out std_logic_vector(7 downto 0);--
             tx : out std_logic;
             RamAddr	: out std_logic_vector(19 downto 0);
             RamData	: out std_logic_vector(31 downto 0);
@@ -111,7 +110,7 @@ architecture bha of top is
 	begin
 		v2:VGA_Controller port map(CLK_in=>clk100, reset=>rst, hs=>hso, vs=>vso, oRed=>ored, oGreen=>ogreen, oBlue=>oblue, R=>midRed, G=>midGreen, B=>midBlue, addr=>VGA_RAM_addr, VGA_CLK=>vga_clk);
       vtran:VGActSRAM port map(clk=>vga_clk, rst=>rst, vR=>midRed, vG=>midGreen, vB=>midBlue, RAMdata=>bufferdata);
-		u2:uart port map(clk=>clk11,rst=>rst, rx=>rx, tx=>tx, LEDRX=>LEDRX ,RamAddr=>Uart_RAM_addr, RamData=>Uart_to_RAM_data, uart_clk_out=>uart_clk,draw=>draw_uart);
+		u2:uart port map(clk=>clk11,rst=>rst, rx=>rx, tx=>tx, RamAddr=>Uart_RAM_addr, RamData=>Uart_to_RAM_data, uart_clk_out=>uart_clk,draw=>draw_uart);
         -- rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>addr_for_ram_read, addr_write=>addr_for_ram_write,data_in=>data_for_ram, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
 		rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>VGA_RAM_addr, addr_write=>Uart_RAM_addr,data_in=>Uart_to_RAM_data, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
 
@@ -124,44 +123,38 @@ architecture bha of top is
             button1_r <= button1_r(button1_r'left-1 downto 0) & uart_clk;
             button2_r <= button2_r(button2_r'left-1 downto 0) & vga_clk;
 
+				
             if button1_r(button1_r'left downto button1_r'left-1) = "01" then -- Button1 rising
                 if draw_uart = '0' then
                     rwmode <= "01";
                 else
                     rwmode <= "10";
                 end if;
-                -- addr_for_ram_write <= Uart_RAM_addr;
-                -- data_for_ram <= Uart_to_RAM_data;
+               -- addr_for_ram_write <= Uart_RAM_addr;
+               -- data_for_ram <= Uart_to_RAM_data;
             elsif button2_r(button2_r'left downto button2_r'left-1) = "01" then -- Button2 rising
                 rwmode <= "01";
-                -- addr_for_ram_read <= VGA_RAM_addr;
+               -- addr_for_ram_read <= VGA_RAM_addr;
+				else
+				   rwmode <= "00";
             end if;
         end if;
     end process;
-    
-    -- process(vga_clk)
-    -- begin
-    --     if(vga_clk'event and vga_clk = '1') then
-    --         cnt <= cnt + 1;
-    --     end if;
-    --     end process;
-
-    -- process(vga_clk)
-    -- begin
-    --     if(vga_clk'event and vga_clk = '1') then
-    --         if(cnt = 250) then
-    --             if(draw_uart = '1') then
-    --                 rwmode <= "10";
-    --                 addr_for_ram_write <= Uart_RAM_addr;
-    --                 data_for_ram <= Uart_to_RAM_data;
-    --             else
-    --                 rwmode <= "01";
-    --             end if;
-    --         else
-    --             rwmode <= "01"; 
-    --             addr_for_ram_read <= VGA_RAM_addr;
-    --         end if;
-    --     end if;
-    -- end process;
-
+	 
+	 process(clk100)
+	 begin
+		lightout(0) <= midGreen(0);
+		lightout(1) <= midGreen(1);
+		lightout(2) <= midGreen(2);
+		lightout(3) <= midBlue(0);
+		lightout(4) <= midBlue(1);
+		lightout(5) <= midBlue(2);
+		lightout(6) <= midRed(0);
+		lightout(7) <= midRed(1);
+		lightout(8) <= midRed(2);
+ 	 end process;
+	 -- process(clk100)
+	 --begin
+	--	LEDRX <= RAM_to_VGA_data(7 downto 0);
+	-- end process;
 end architecture bha;

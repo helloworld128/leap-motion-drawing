@@ -1,0 +1,636 @@
+Analysis & Synthesis report for top
+Mon Jun 03 16:51:28 2019
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Partition Status Summary
+  7. Dependent File Changes for Partition Top
+  8. Partition for Top-Level Resource Utilization by Entity
+  9. State Machine - |top|SRAM:rm|state
+ 10. Registers Removed During Synthesis
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Partition Dependent Files
+ 14. Parameter Settings for Inferred Entity Instance: sld_signaltap:auto_signaltap_0
+ 15. SignalTap II Logic Analyzer Settings
+ 16. Elapsed Time Per Partition
+ 17. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                          ;
++------------------------------------+--------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Jun 03 16:51:28 2019            ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
+; Revision Name                      ; top                                              ;
+; Top-level Entity Name              ; top                                              ;
+; Family                             ; Cyclone II                                       ;
+; Total logic elements               ; N/A until Partition Merge                        ;
+;     Total combinational functions  ; N/A until Partition Merge                        ;
+;     Dedicated logic registers      ; N/A until Partition Merge                        ;
+; Total registers                    ; N/A until Partition Merge                        ;
+; Total pins                         ; N/A until Partition Merge                        ;
+; Total virtual pins                 ; N/A until Partition Merge                        ;
+; Total memory bits                  ; N/A until Partition Merge                        ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                        ;
+; Total PLLs                         ; N/A until Partition Merge                        ;
++------------------------------------+--------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C70F672C8       ;                    ;
+; Top-level entity name                                                      ; top                ; top                ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.40        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;  40.0%      ;
+;     Processors 3-4         ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; top.vhd                          ; yes             ; Auto-Found VHDL File         ; E:/alter13/project/atop/top.vhd                                         ;         ;
+; vga_controller.vhd               ; yes             ; Auto-Found VHDL File         ; E:/alter13/project/atop/vga_controller.vhd                              ;         ;
+; vgactsram.vhd                    ; yes             ; Auto-Found VHDL File         ; E:/alter13/project/atop/vgactsram.vhd                                   ;         ;
+; uart.vhd                         ; yes             ; Auto-Found VHDL File         ; E:/alter13/project/atop/uart.vhd                                        ;         ;
+; sram.vhd                         ; yes             ; Auto-Found VHDL File         ; E:/alter13/project/atop/sram.vhd                                        ;         ;
+; sld_signaltap.vhd                ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/sld_signaltap.vhd            ;         ;
+; sld_signaltap_impl.vhd           ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_signaltap_impl.vhd       ;         ;
+; sld_ela_control.vhd              ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_ela_control.vhd          ;         ;
+; lpm_shiftreg.tdf                 ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_shiftreg.tdf             ;         ;
+; lpm_constant.inc                 ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_constant.inc             ;         ;
+; dffeea.inc                       ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/dffeea.inc                   ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/aglobal130.inc               ;         ;
+; sld_mbpmg.vhd                    ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_mbpmg.vhd                ;         ;
+; sld_ela_trigger_flow_mgr.vhd     ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_ela_trigger_flow_mgr.vhd ;         ;
+; sld_buffer_manager.vhd           ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_buffer_manager.vhd       ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altsyncram.tdf               ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/stratix_ram_block.inc        ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_mux.inc                  ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_decode.inc               ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/a_rdenreg.inc                ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altrom.inc                   ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altram.inc                   ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altdpram.inc                 ;         ;
+; db/altsyncram_2n14.tdf           ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/altsyncram_2n14.tdf                          ;         ;
+; db/altsyncram_abq1.tdf           ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/altsyncram_abq1.tdf                          ;         ;
+; altdpram.tdf                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altdpram.tdf                 ;         ;
+; memmodes.inc                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/others/maxplus2/memmodes.inc               ;         ;
+; a_hdffe.inc                      ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/a_hdffe.inc                  ;         ;
+; alt_le_rden_reg.inc              ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/alt_le_rden_reg.inc          ;         ;
+; altsyncram.inc                   ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altsyncram.inc               ;         ;
+; lpm_mux.tdf                      ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_mux.tdf                  ;         ;
+; muxlut.inc                       ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/muxlut.inc                   ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/bypassff.inc                 ;         ;
+; altshift.inc                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/altshift.inc                 ;         ;
+; db/mux_coc.tdf                   ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/mux_coc.tdf                                  ;         ;
+; lpm_decode.tdf                   ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_decode.tdf               ;         ;
+; declut.inc                       ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/declut.inc                   ;         ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_compare.inc              ;         ;
+; db/decode_rqf.tdf                ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/decode_rqf.tdf                               ;         ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_counter.tdf              ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_add_sub.inc              ;         ;
+; cmpconst.inc                     ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/cmpconst.inc                 ;         ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/lpm_counter.inc              ;         ;
+; alt_counter_stratix.inc          ; yes             ; Megafunction                 ; e:/alter13/quartus/libraries/megafunctions/alt_counter_stratix.inc      ;         ;
+; db/cntr_fai.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cntr_fai.tdf                                 ;         ;
+; db/cmpr_8cc.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cmpr_8cc.tdf                                 ;         ;
+; db/cntr_32j.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cntr_32j.tdf                                 ;         ;
+; db/cntr_0ci.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cntr_0ci.tdf                                 ;         ;
+; db/cmpr_9cc.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cmpr_9cc.tdf                                 ;         ;
+; db/cntr_gui.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cntr_gui.tdf                                 ;         ;
+; db/cmpr_5cc.tdf                  ; yes             ; Auto-Generated Megafunction  ; E:/alter13/project/atop/db/cmpr_5cc.tdf                                 ;         ;
+; sld_rom_sr.vhd                   ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_rom_sr.vhd               ;         ;
+; sld_hub.vhd                      ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_hub.vhd                  ;         ;
+; sld_jtag_hub.vhd                 ; yes             ; Encrypted Megafunction       ; e:/alter13/quartus/libraries/megafunctions/sld_jtag_hub.vhd             ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------------------+
+; Partition Status Summary                                               ;
++--------------------------------+-------------+-------------------------+
+; Partition Name                 ; Synthesized ; Reason                  ;
++--------------------------------+-------------+-------------------------+
+; Top                            ; yes         ; Dependent files changed ;
+; sld_signaltap:auto_signaltap_0 ; no          ; No relevant changes     ;
+; sld_hub:auto_hub               ; yes         ; Parameters changed      ;
++--------------------------------+-------------+-------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Dependent File Changes for Partition Top                                                                                   ;
++-----------+-----------+-------------------+----------+----------------------------------+----------------------------------+
+; Hierarchy ; File Name ; Relative Location ; Change   ; Old                              ; New                              ;
++-----------+-----------+-------------------+----------+----------------------------------+----------------------------------+
+; uart:u2   ; uart.vhd  ; Project Directory ; Checksum ; 65f2d6fac322154588c1eec85ee16378 ; 24c9df395e75056f217a0733cd94440a ;
+; |         ; top.vhd   ; Project Directory ; Checksum ; 5d3c40f7f488ce172136e0c50639de87 ; 400ede71f198248a03e831dce0e5eedc ;
++-----------+-----------+-------------------+----------+----------------------------------+----------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition for Top-Level Resource Utilization by Entity                                                                                                                         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name    ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
+; |top                       ; 144 (3)           ; 194 (8)      ; 0           ; 0            ; 0       ; 0         ; 52   ; 0            ; |top                   ; work         ;
+;    |SRAM:rm|               ; 9 (9)             ; 90 (90)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|SRAM:rm           ; work         ;
+;    |VGA_Controller:v2|     ; 72 (72)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|VGA_Controller:v2 ; work         ;
+;    |VGActSRAM:vtran|       ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|VGActSRAM:vtran   ; work         ;
+;    |uart:u2|               ; 60 (60)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top|uart:u2           ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------+
+; State Machine - |top|SRAM:rm|state                                              ;
++-----------------+---------------+-----------------+----------------+------------+
+; Name            ; state.mem_end ; state.mem_write ; state.mem_read ; state.idle ;
++-----------------+---------------+-----------------+----------------+------------+
+; state.idle      ; 0             ; 0               ; 0              ; 0          ;
+; state.mem_read  ; 0             ; 0               ; 1              ; 1          ;
+; state.mem_write ; 0             ; 1               ; 0              ; 1          ;
+; state.mem_end   ; 1             ; 0               ; 0              ; 1          ;
++-----------------+---------------+-----------------+----------------+------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; uart:u2|RamData[9..31]                 ; Stuck at GND due to stuck port data_in ;
+; uart:u2|RamData[0..2,6..8]             ; Stuck at VCC due to stuck port data_in ;
+; uart:u2|draw                           ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[31]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[30]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[29]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[28]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[27]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[26]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[25]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[24]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[23]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[22]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[21]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[20]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[19]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[18]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[17]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[16]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[15]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[14]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[13]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[12]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[11]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[10]~reg0           ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[9]~reg0            ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[8]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[7]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[6]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[2]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[1]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; SRAM:rm|BASERAMDATA[0]~reg0            ; Stuck at VCC due to stuck port data_in ;
+; VGA_Controller:v2|addr[19]             ; Stuck at GND due to stuck port data_in ;
+; SRAM:rm|BASERAMADDR[19]~reg0           ; Stuck at GND due to stuck port data_in ;
+; uart:u2|RamData[3,4]                   ; Merged with uart:u2|RamData[5]         ;
+; Total Number of Removed Registers = 63 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                     ;
++----------------------------+---------------------------+----------------------------------------+
+; Register name              ; Reason for Removal        ; Registers Removed due to This Register ;
++----------------------------+---------------------------+----------------------------------------+
+; uart:u2|RamData[31]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[31]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[30]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[30]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[29]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[29]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[28]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[28]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[27]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[27]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[26]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[26]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[25]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[25]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[24]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[24]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[23]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[23]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[22]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[22]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[21]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[21]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[20]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[20]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[19]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[19]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[18]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[18]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[17]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[17]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[16]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[16]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[15]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[15]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[14]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[14]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[13]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[13]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[12]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[12]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[11]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[11]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[10]        ; Stuck at GND              ; SRAM:rm|BASERAMDATA[10]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[9]         ; Stuck at GND              ; SRAM:rm|BASERAMDATA[9]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[8]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[8]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[7]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[7]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[6]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[6]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[2]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[2]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[1]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[1]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; uart:u2|RamData[0]         ; Stuck at VCC              ; SRAM:rm|BASERAMDATA[0]~reg0            ;
+;                            ; due to stuck port data_in ;                                        ;
+; VGA_Controller:v2|addr[19] ; Stuck at GND              ; SRAM:rm|BASERAMADDR[19]~reg0           ;
+;                            ; due to stuck port data_in ;                                        ;
++----------------------------+---------------------------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |top|VGA_Controller:v2|bt[1] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Partition Dependent Files                                                           ;
++--------------------+-------------------+---------+----------------------------------+
+; File               ; Location          ; Library ; Checksum                         ;
++--------------------+-------------------+---------+----------------------------------+
+; sram.vhd           ; Project Directory ; work    ; b7682023fb67a04424f8e681b443fc8e ;
+; top.vhd            ; Project Directory ; work    ; 400ede71f198248a03e831dce0e5eedc ;
+; uart.vhd           ; Project Directory ; work    ; 24c9df395e75056f217a0733cd94440a ;
+; vga_controller.vhd ; Project Directory ; work    ; 4280f8220cff08f77e91eba5c0b55089 ;
+; vgactsram.vhd      ; Project Directory ; work    ; 3719d6871e88bb489911ad41a7e49635 ;
++--------------------+-------------------+---------+----------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: sld_signaltap:auto_signaltap_0                                      ;
++-------------------------------------------------+---------------------------------------------------+----------------+
+; Parameter Name                                  ; Value                                             ; Type           ;
++-------------------------------------------------+---------------------------------------------------+----------------+
+; lpm_type                                        ; sld_signaltap                                     ; String         ;
+; sld_node_info                                   ; 805334528                                         ; Untyped        ;
+; SLD_IP_VERSION                                  ; 6                                                 ; Signed Integer ;
+; SLD_IP_MINOR_VERSION                            ; 0                                                 ; Signed Integer ;
+; SLD_COMMON_IP_VERSION                           ; 0                                                 ; Signed Integer ;
+; sld_data_bits                                   ; 9                                                 ; Untyped        ;
+; sld_trigger_bits                                ; 9                                                 ; Untyped        ;
+; SLD_NODE_CRC_BITS                               ; 32                                                ; Signed Integer ;
+; sld_node_crc_hiword                             ; 64646                                             ; Untyped        ;
+; sld_node_crc_loword                             ; 61681                                             ; Untyped        ;
+; SLD_INCREMENTAL_ROUTING                         ; 0                                                 ; Signed Integer ;
+; sld_sample_depth                                ; 256                                               ; Untyped        ;
+; sld_segment_size                                ; 256                                               ; Untyped        ;
+; SLD_RAM_BLOCK_TYPE                              ; AUTO                                              ; String         ;
+; sld_state_bits                                  ; 11                                                ; Untyped        ;
+; sld_buffer_full_stop                            ; 1                                                 ; Untyped        ;
+; SLD_MEM_ADDRESS_BITS                            ; 7                                                 ; Signed Integer ;
+; SLD_DATA_BIT_CNTR_BITS                          ; 4                                                 ; Signed Integer ;
+; sld_trigger_level                               ; 1                                                 ; Untyped        ;
+; sld_trigger_in_enabled                          ; 1                                                 ; Untyped        ;
+; SLD_HPS_TRIGGER_IN_ENABLED                      ; 0                                                 ; Signed Integer ;
+; SLD_HPS_TRIGGER_OUT_ENABLED                     ; 0                                                 ; Signed Integer ;
+; SLD_HPS_EVENT_ENABLED                           ; 0                                                 ; Signed Integer ;
+; SLD_HPS_EVENT_ID                                ; 0                                                 ; Signed Integer ;
+; sld_advanced_trigger_entity                     ; basic,1,                                          ; Untyped        ;
+; sld_trigger_level_pipeline                      ; 1                                                 ; Untyped        ;
+; sld_enable_advanced_trigger                     ; 0                                                 ; Untyped        ;
+; SLD_ADVANCED_TRIGGER_1                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_2                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_3                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_4                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_5                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_6                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_7                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_8                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_9                          ; NONE                                              ; String         ;
+; SLD_ADVANCED_TRIGGER_10                         ; NONE                                              ; String         ;
+; sld_inversion_mask_length                       ; 49                                                ; Untyped        ;
+; sld_inversion_mask                              ; 0000000000000000000000000000000000000000000000000 ; Untyped        ;
+; sld_power_up_trigger                            ; 0                                                 ; Untyped        ;
+; SLD_STATE_FLOW_MGR_ENTITY                       ; state_flow_mgr_entity.vhd                         ; String         ;
+; sld_state_flow_use_generated                    ; 0                                                 ; Untyped        ;
+; sld_current_resource_width                      ; 1                                                 ; Untyped        ;
+; sld_attribute_mem_mode                          ; OFF                                               ; Untyped        ;
+; SLD_STORAGE_QUALIFIER_BITS                      ; 1                                                 ; Signed Integer ;
+; SLD_STORAGE_QUALIFIER_GAP_RECORD                ; 0                                                 ; Signed Integer ;
+; SLD_STORAGE_QUALIFIER_MODE                      ; OFF                                               ; String         ;
+; SLD_STORAGE_QUALIFIER_ENABLE_ADVANCED_CONDITION ; 0                                                 ; Signed Integer ;
+; sld_storage_qualifier_inversion_mask_length     ; 0                                                 ; Untyped        ;
+; SLD_STORAGE_QUALIFIER_ADVANCED_CONDITION_ENTITY ; basic                                             ; String         ;
+; SLD_STORAGE_QUALIFIER_PIPELINE                  ; 0                                                 ; Signed Integer ;
++-------------------------------------------------+---------------------------------------------------+----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; SignalTap II Logic Analyzer Settings                                                                                                                                                                                                                                    ;
++----------------+------------------+---------------------+------------------+--------------+----------+------------------------+----------------------+--------------------+-----------------------------+-----------------+------------------+--------------------------+
+; Instance Index ; Instance Name    ; Trigger Input Width ; Data Input Width ; Sample Depth ; Segments ; Storage Qualifier Type ; Trigger Flow Control ; Trigger Conditions ; Advanced Trigger Conditions ; Trigger In Used ; Trigger Out Used ; Power-Up Trigger Enabled ;
++----------------+------------------+---------------------+------------------+--------------+----------+------------------------+----------------------+--------------------+-----------------------------+-----------------+------------------+--------------------------+
+; 0              ; auto_signaltap_0 ; 9                   ; 9                ; 256          ; 1        ; continuous             ; sequential           ; 1                  ; 0                           ; no              ; no               ; no                       ;
++----------------+------------------+---------------------+------------------+--------------+----------+------------------------+----------------------+--------------------+-----------------------------+-----------------+------------------+--------------------------+
+
+
++---------------------------------+
+; Elapsed Time Per Partition      ;
++------------------+--------------+
+; Partition Name   ; Elapsed Time ;
++------------------+--------------+
+; Top              ; 00:00:02     ;
+; sld_hub:auto_hub ; 00:00:02     ;
++------------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+    Info: Processing started: Mon Jun 03 16:51:22 2019
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top -c top
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Warning (12125): Using design file top.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: top-bha
+    Info (12023): Found entity 1: top
+Info (12127): Elaborating entity "top" for the top level hierarchy
+Warning (10492): VHDL Process Statement warning at top.vhd(146): signal "midGreen" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(147): signal "midGreen" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(148): signal "midGreen" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(149): signal "midBlue" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(150): signal "midBlue" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(151): signal "midBlue" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(152): signal "midRed" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(153): signal "midRed" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top.vhd(154): signal "midRed" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10873): Using initial value X (don't care) for net "lightout[31..9]" at top.vhd(21)
+Warning (12125): Using design file vga_controller.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: VGA_Controller-behave
+    Info (12023): Found entity 1: VGA_Controller
+Info (12128): Elaborating entity "VGA_Controller" for hierarchy "VGA_Controller:v2"
+Warning (12125): Using design file vgactsram.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: VGActSRAM-beha
+    Info (12023): Found entity 1: VGActSRAM
+Info (12128): Elaborating entity "VGActSRAM" for hierarchy "VGActSRAM:vtran"
+Warning (12125): Using design file uart.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: uart-bev
+    Info (12023): Found entity 1: uart
+Info (12128): Elaborating entity "uart" for hierarchy "uart:u2"
+Warning (10541): VHDL Signal Declaration warning at uart.vhd(12): used implicit default value for signal "tx" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at uart.vhd(13): used implicit default value for signal "RamAddr" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at uart.vhd(34): object "xaxis" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at uart.vhd(37): object "pre_yaxis" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at uart.vhd(40): object "tempData" assigned a value but never read
+Warning (12125): Using design file sram.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: SRAM-beh
+    Info (12023): Found entity 1: SRAM
+Info (12128): Elaborating entity "SRAM" for hierarchy "SRAM:rm"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_2n14.tdf
+    Info (12023): Found entity 1: altsyncram_2n14
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_abq1.tdf
+    Info (12023): Found entity 1: altsyncram_abq1
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_coc.tdf
+    Info (12023): Found entity 1: mux_coc
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_rqf.tdf
+    Info (12023): Found entity 1: decode_rqf
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_fai.tdf
+    Info (12023): Found entity 1: cntr_fai
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_8cc.tdf
+    Info (12023): Found entity 1: cmpr_8cc
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_32j.tdf
+    Info (12023): Found entity 1: cntr_32j
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_0ci.tdf
+    Info (12023): Found entity 1: cntr_0ci
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_9cc.tdf
+    Info (12023): Found entity 1: cmpr_9cc
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_gui.tdf
+    Info (12023): Found entity 1: cntr_gui
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_5cc.tdf
+    Info (12023): Found entity 1: cmpr_5cc
+Info (12033): Analysis and Synthesis generated SignalTap II or debug node instance "auto_signaltap_0"
+Info (12206): 2 design partitions require synthesis
+    Info (12211): Partition "Top" requires synthesis because there were changes to its dependent source files
+    Info (12217): Partition "sld_hub:auto_hub" requires synthesis because there were changes made to the parameters on the partition's root instance
+Info (12207): 1 design partition does not require synthesis
+    Info (12229): Partition "sld_signaltap:auto_signaltap_0" does not require synthesis because there were no relevant design changes
+Info (281037): Using 2 processors to synthesize 2 partitions in parallel
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+    Info: Processing started: Mon Jun 03 16:51:26 2019
+Info: Command: quartus_map --parallel=1 --helper=0 --partition=Top top -c top
+Info (281020): Starting Logic Optimization and Technology Mapping for Top Partition
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "tx" is stuck at GND
+    Warning (13410): Pin "lightout[9]" is stuck at GND
+    Warning (13410): Pin "lightout[10]" is stuck at GND
+    Warning (13410): Pin "lightout[11]" is stuck at GND
+    Warning (13410): Pin "lightout[12]" is stuck at GND
+    Warning (13410): Pin "lightout[13]" is stuck at GND
+    Warning (13410): Pin "lightout[14]" is stuck at GND
+    Warning (13410): Pin "lightout[15]" is stuck at GND
+    Warning (13410): Pin "lightout[16]" is stuck at GND
+    Warning (13410): Pin "lightout[17]" is stuck at GND
+    Warning (13410): Pin "lightout[18]" is stuck at GND
+    Warning (13410): Pin "lightout[19]" is stuck at GND
+    Warning (13410): Pin "lightout[20]" is stuck at GND
+    Warning (13410): Pin "lightout[21]" is stuck at GND
+    Warning (13410): Pin "lightout[22]" is stuck at GND
+    Warning (13410): Pin "lightout[23]" is stuck at GND
+    Warning (13410): Pin "lightout[24]" is stuck at GND
+    Warning (13410): Pin "lightout[25]" is stuck at GND
+    Warning (13410): Pin "lightout[26]" is stuck at GND
+    Warning (13410): Pin "lightout[27]" is stuck at GND
+    Warning (13410): Pin "lightout[28]" is stuck at GND
+    Warning (13410): Pin "lightout[29]" is stuck at GND
+    Warning (13410): Pin "lightout[30]" is stuck at GND
+    Warning (13410): Pin "lightout[31]" is stuck at GND
+Info (21057): Implemented 418 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 87 output pins
+    Info (21060): Implemented 64 bidirectional pins
+    Info (21061): Implemented 263 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 25 warnings
+    Info: Peak virtual memory: 4614 megabytes
+    Info: Processing ended: Mon Jun 03 16:51:27 2019
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:03
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+    Info: Processing started: Mon Jun 03 16:51:26 2019
+Info: Command: quartus_map --parallel=1 --helper=2 --partition=sld_hub:auto_hub top -c top
+Info (281019): Starting Logic Optimization and Technology Mapping for Partition sld_hub:auto_hub
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "sld_hub:auto_hub|receive[0][0]" is stuck at GND
+Info (21057): Implemented 203 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 19 input pins
+    Info (21059): Implemented 37 output pins
+    Info (21061): Implemented 147 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 4614 megabytes
+    Info: Processing ended: Mon Jun 03 16:51:27 2019
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:03
+Info (281038): Finished parallel synthesis of all partitions
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 47 warnings
+    Info: Peak virtual memory: 4694 megabytes
+    Info: Processing ended: Mon Jun 03 16:51:28 2019
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:08
+
+

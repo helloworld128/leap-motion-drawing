@@ -32,7 +32,7 @@ architecture beh of SRAM is
     begin
         process( clk,reset )
         begin
-            if(reset = '1') then
+            if(reset = '0') then
                 state <= idle;
             elsif(clk'event and clk = '1') then
                 case state is

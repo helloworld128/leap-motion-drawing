@@ -17,7 +17,7 @@ architecture beha of VGActSRAM is
 begin
     process(clk,rst)
     begin
-        if(rst = '1') then
+        if(rst = '0') then
             vR <= "000";
             vB <= "000";
             vG <= "000";

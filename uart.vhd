@@ -9,7 +9,6 @@ entity uart is
 				rst : in std_logic;
 				rx : in std_logic;
 			---  to delete
-				LEDRX: out std_logic_vector(7 downto 0);--
 				tx : out std_logic;
 				RamAddr	: out std_logic_vector(19 downto 0);
 				RamData	: out std_logic_vector(31 downto 0);
@@ -40,6 +39,13 @@ signal pre_yaxis : std_logic_vector(15 downto 0) := (others=>'0');
 signal gesture : std_logic_vector(7 downto 0);
 signal tempData : std_logic_vector(31 downto 0) := (others=>'1');
 
+--signal clean_cnt : integer range 0 to 307219;
+signal clean_flag : std_logic := '0';
+signal clean_x : std_logic_vector(9 downto 0) := "0000000000";
+signal clean_y : std_logic_vector(8 downto 0) := "000000000";
+
+signal test_write_addr :std_logic_vector(19 downto 0):= "00000000000000000000";
+
 begin 
 ------------------------------------------
 uart_clk_out <= uart_clk;
@@ -49,7 +55,7 @@ begin
 						if rst='0' then 
 							cnt<=0;
 						elsif (clk'event and clk='1')    then		
-								if cnt = 1151  then 
+								if cnt = 151  then 
 									cnt<=0;
 								else
 									cnt<=cnt+1;
@@ -62,7 +68,7 @@ begin
 				if rst='0' then 
 					uart_clk<='0';
 				elsif  clk'event and clk='1' then 	
-						if (cnt=1151) then
+						if (cnt=151) then
 						uart_clk<='1';	
 						else
 						uart_clk<='0';	
@@ -97,22 +103,19 @@ begin
 										cnt2<=cnt2+1;
 			when 7 =>rx8bit(6)<=rx;
 										cnt2<=cnt2+1;
-			when 8 =>rx8bit(7)<=rx;
-							  --to delete
-									--LEDRX<=rx8bit;
-									--tempdata := tempdata + 1;
+			when 8 =>rx8bit(7)<=rx; 
+										cnt2 <= cnt2+1;
+			when 9 => if(rx = '1') then
 									case( reccnt ) is
-										-- when 0 => xaxis <= "00" & rx8bit; reccnt <= 1;
-										-- when 1 => yaxis <= "00" & rx8bit; reccnt <= 0;
 										when 0 =>  gesture <= rx8bit; reccnt <= reccnt + 1;
 										when 1 => xaxis(7 downto 0) <= rx8bit; reccnt <= reccnt + 1;
 										when 2 => xaxis(15 downto 8) <= rx8bit; reccnt <= reccnt + 1;
 										when 3 => yaxis(7 downto 0) <= rx8bit; reccnt <= reccnt + 1;
 										when 4 => yaxis(15 downto 8) <= rx8bit; reccnt <= 0;
 										when others => NULL;
-						   		end case ;
-								
-								cnt2<=0;
+						   		end case;
+						end if;
+						cnt2<=0;
 								
 								--tempdata <= tempdata + 1;
 								--	case( reccnt ) is
@@ -160,35 +163,75 @@ end process;
 -- 	end if;
 -- end process;
 
+
+-- clean_flag : '1' clean   '0'  not
+
 process(uart_clk)
 begin
 	if rising_edge(uart_clk) then
-		if(reccnt = 0) then
-			if(gesture(0) = '0') then
-				draw <= '0';
+		if clean_flag = '1' then
+			tempData <= (others=>'1');
+			if clean_y < 480 then 
+				if clean_x < 640 then
+					clean_x <= clean_x + 1;
+				else
+					clean_y <= clean_y + 1;
+					clean_x <= (others=>'0');
+				end if;
 			else
-				draw <= '1';
+				clean_y <= (others=>'0');
+				clean_x <= (others=>'0');
+				clean_flag <= '0';
 			end if;
-			if(gesture(1) = '0') then
-				tempData <= (others=>'1');
-			else
-				if(gesture(2) = '1') then
-					tempData(8 downto 0) <= "000111101";
-				end if; 
+
+		else
+			if(reccnt = 0) then
+				-- if(gesture(0) = '0') then
+				-- 	draw <= '0';
+				-- else
+				-- 	draw <= '1';
+				-- end if;
+				--draw <= gesture(0);
+				if(gesture(1) = '0') then
+					tempData <= (others=>'1');
+					clean_flag <= '1';
+				else
+					if(gesture(2) = '1') then
+						tempData(8 downto 0) <= "000111101";
+					end if; 
+				end if;
 			end if;
 		end if;
 	end if;
+
 end process;
 		
-
 
 process(uart_clk)
 begin
 	if(rising_edge(uart_clk)) then
 		pre_yaxis <= yaxis; 
-		RamData <= tempData;
-		RamAddr <= "0" & xaxis(9 downto 0) & yaxis(8 downto 0); 
-		LEDRX <= yaxis(7 downto 0);
+		--RamData <= tempData;
+		--RamAddr <= "0" & xaxis(9 downto 0) & yaxis(8 downto 0); 
+		if(test_write_addr < 100000) then
+			test_write_addr <= test_write_addr + 1;
+		else
+			test_write_addr <= (others=>'1');
+		end if;
+
+		if (test_write_addr < 10000) then
+			RamData <= "00000000000000000000000111000111";
+		elsif (test_write_addr < 30000) then
+			RamData <= "00000000000000000000000111111111";
+		elsif (test_write_addr < 50000) then
+			RamData <= "00000000000000000000000111000111";
+		elsif (test_write_addr < 80000) then
+			RamData <= "00000000000000000000000111111111";
+		else
+			RamData <= "00000000000000000000000111000111";
+ 		end if;
+	--	RamAddr <= test_write_addr;
+		draw <= '1';
 	end if;
 end process;
 

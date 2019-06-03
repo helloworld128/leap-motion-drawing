@@ -130,7 +130,7 @@ begin
 ------------------------------------------------------------------------
 	process (CLK, reset) 
 	begin	  	
-		if reset = '1' then
+		if reset = '0' then
 			rt		<=	(others => '0');
 			gt		<=	(others => '0');
 			bt		<=	(others => '0');
