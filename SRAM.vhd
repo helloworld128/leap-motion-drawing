@@ -28,25 +28,55 @@ architecture beh of SRAM is
     signal state : memory_state;
     signal data_out : std_logic_vector(31 downto 0);
     signal in_addr : std_logic_vector(19 downto 0);
+    signal clk50M : std_logic := '0';
 
     begin
-        process( clk,reset )
+        process(clk)
+        begin
+            if clk'event and clk = '1' then
+                clk50M <= not clk50M;
+            end if;
+        end process;
+
+        process( clk,reset,clk50M )
         begin
             if(reset = '0') then
                 state <= idle;
             elsif(clk'event and clk = '1') then
                 case state is
-                    when idle => if(mode = "01") then   -- 01 read   10 write  else null
-                                        state <= mem_read;
-                                elsif(mode = "10") then
-                                        state <= mem_write;
-                                else
-                                    state <= idle;
-                                end if;
-
-                                BASERAMADDR<=(others=>'Z');                                                                    
-                                BASERAMDATA<=(others=>'Z');
-   
+                    when idle => 
+                                 if(mode = "01") then   -- 01 read   10 write  else null
+                                         state <= mem_read;
+                                 elsif(mode = "10") then
+                                         state <= mem_write;
+                                 else
+                                     state <= idle;
+                                 end if;
+                                --state <= mem_read;
+                    when mem_read =>
+                        state <= mem_end;
+                    when mem_write =>
+                        state <= mem_end;
+                    when mem_end =>
+                        state <= idle;   
+                    end case;
+					end if;
+        end process ;
+    
+        process(reset,clk,clk50M)
+        begin
+            if reset='0' then
+                BASERAMCE <= '1';
+                BASERAMOE <= '1';
+                BASERAMWE <= '1';
+            elsif clk'event and clk = '1' then
+                case state is
+                    when idle =>
+                        BASERAMCE <= '1';
+                        BASERAMWE <= '1';
+                        BASERAMOE <= '1';
+                        BASERAMDATA <= (others=>'Z');
+                        BASERAMADDR <= (others=>'Z');
                     when mem_read =>
                         BASERAMWE <= '1';
                         BASERAMCE <= '0';
@@ -54,23 +84,26 @@ architecture beh of SRAM is
                         BASERAMADDR <= addr_read;
                         -- data_out <= BASERAMDATA;
                         rwdata <= BASERAMDATA;
-                        state <= mem_end;
                     when mem_write =>
                         BASERAMWE <= '0';
                         BASERAMOE <= '1';
                         BASERAMCE <= '0';
-                        BASERAMADDR <= addr_read;
+                        BASERAMADDR <= addr_write;
                         BASERAMDATA <= data_in;
-                        state <= mem_end;
-                    when mem_end =>
-								BASERAMCE <= '1';
-								BASERAMOE <= '1';
-								BASERAMWE <= '1';
+                    when mem_end => 
+                        BASERAMCE <= '1';
+                        BASERAMOE <= '1';
+                        BASERAMWE <= '1';
                         BASERAMADDR<=(others=>'Z');                                                                    
                         BASERAMDATA<=(others=>'Z');
-                        state <= idle;   
+                    when others => 
+                        BASERAMCE <= '1';
+                        BASERAMOE <= '1';
+                        BASERAMWE <= '1';
+                        BASERAMADDR<=(others=>'Z');                                                                    
+                        BASERAMDATA<=(others=>'Z');    
                     end case;
-					end if;
-        end process ;
+				end if;
+         end process;
     end architecture;
             

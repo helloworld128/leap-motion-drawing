@@ -1,48 +1,55 @@
 library ieee;
 use ieee.std_logic_1164.all;
+-- use ieee.std_logic_arith.all;
+-- use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
-	entity top is
+    entity top is
     port(
         clk11 : in std_logic;
         rst : in std_logic;
         rx : in std_logic;
         tx : out std_logic;
         clk100 : in std_logic;
-
+			
         hso,vso : out std_logic;
         ored : out std_logic_vector(2 downto 0);
         oblue: out std_logic_vector(2 downto 0);
-        ogreen: out std_logic_vector(2 downto 0);
-		WE  : out std_logic;
-        OE  : out std_logic;
-        CE  : out std_logic;
-        addr_sram   : out std_logic_vector(19 downto 0);
-        data_sram   : inout std_logic_vector(31 downto 0);
-		  lightout : out std_logic_vector(31 downto 0)
+        ogreen: out std_logic_vector(2 downto 0)
     );
 end entity top;
 
 architecture bha of top is
+    
+    signal vgadata : std_logic_vector(8 downto 0);
+    signal vga_x : std_logic_vector(8 downto 0);
+    signal vga_y : std_logic_vector(8 downto 0);
+    signal read_addr : std_logic_vector(16 downto 0);
 
-    signal midRed   : std_logic_vector(2 downto 0) := "000";
-    signal midBlue  : std_logic_vector(2 downto 0) := "000";
-    signal midGreen : std_logic_vector(2 downto 0) := "000";
-    signal VGA_RAM_addr : std_logic_vector(19 downto 0);
-    signal Uart_RAM_addr: std_logic_vector(19 downto 0);
-    signal RAM_to_VGA_data  : std_logic_vector(31 downto 0);
-    signal Uart_to_RAM_data : std_logic_vector(31 downto 0); 
-	 signal bufferdata : std_logic_vector(31 downto 0); -- read from sram , to vga_trans
-    signal uart_clk : std_logic := '0';
-    signal vga_clk : std_logic := '0';
-    signal rwmode : std_logic_vector(1 downto 0) := "00";
-    signal addr_for_ram_read : std_logic_vector(19 downto 0);
-    signal addr_for_ram_write : std_logic_vector(19 downto 0);
-    signal data_for_ram : std_logic_vector(31 downto 0);
-    signal cnt: integer range 0 to 250 := 0;
-    signal draw_uart : std_logic := '0';
+    signal uartdata : std_logic_vector(8 downto 0);
+    signal uart_x : std_logic_vector(8 downto 0);
+    signal uart_y : std_logic_vector(8 downto 0);
+    signal write_addr : std_logic_vector(16 downto 0);
 
-    signal button1_r : std_logic_vector(2 downto 0);
-    signal button2_r : std_logic_vector(2 downto 0);   
+    signal rw : std_logic;
+    signal vga_clk : std_logic;
+    signal uart_clk: std_logic;
+    signal wren : std_logic := '1';
+
+    signal cur_x : std_logic_vector(8 downto 0);
+    signal cur_y : std_logic_vector(8 downto 0);
+     
+    component ram
+        PORT(
+            data        : IN STD_LOGIC_VECTOR (8 DOWNTO 0);
+            rdaddress        : IN STD_LOGIC_VECTOR (16 DOWNTO 0);
+            rdclock        : IN STD_LOGIC ;
+            wraddress        : IN STD_LOGIC_VECTOR (16 DOWNTO 0);
+            wrclock        : IN STD_LOGIC  := '1';
+            wren        : IN STD_LOGIC  := '0';
+            q        : OUT STD_LOGIC_VECTOR (8 DOWNTO 0)
+        );
+    end component;
     
     component VGA_Controller is
         port(
@@ -52,109 +59,56 @@ architecture bha of top is
             oGreen  : out std_logic_vector(2 downto 0);
             oBlue   : out std_logic_vector(2 downto 0);
 
-            R,G,B	: in  std_logic_vector (2 downto 0);
-            addr	: out std_logic_vector (19 downto 0);
+            rgbin   : in std_logic_vector(8 downto 0);
+            x_out   : out std_logic_vector(8 downto 0);
+            y_out   : out std_logic_vector(8 downto 0);
 
+            cursor_x : in std_logic_vector(8 downto 0);
+            cursor_y : in std_logic_vector(8 downto 0);
             reset   : in std_logic;
             CLK_in  : in std_logic
         );
     end component;
     
-    component VGActSRAM is
-        port(
-            clk : in std_logic;
-            rst : in std_logic;
-            vR, vG, vB  : out std_logic_vector(2 downto 0);
-            -- addrs : inout std_logic_vector(15 downto 0);
-            -- addr_out : out std_logic_vector(19 downto 0);
-            RAMdata :in std_logic_vector(31 downto 0)
-        );
-    end component;
-
 
     component uart is
         port(
-            clk : in std_logic; --100MHz
+            clk : in std_logic; -- 11.0592MHz
             rst : in std_logic;
-            rx : in std_logic;
-        ---  to delete
+            rx  : in std_logic;
             tx : out std_logic;
-            RamAddr	: out std_logic_vector(19 downto 0);
-            RamData	: out std_logic_vector(31 downto 0);
+            x : out std_logic_vector(8 downto 0);
+            y : out std_logic_vector(8 downto 0);
+            color : out std_logic_vector(8 downto 0);
             uart_clk_out : out std_logic;
-            draw : out std_logic
-        );
-    end component;
-    
-    component SRAM is
-        port(
-        --- reset & clk 
-            clk      : in std_logic;
-            reset    : in std_logic;
-
-            mode    : in std_logic_vector(1 downto 0);
-            addr_read : in std_logic_vector(19 downto 0);
-            addr_write : in std_logic_vector(19 downto 0);
-            data_in : in std_logic_vector(31 downto 0);
-            rwdata : out std_logic_vector(31 downto 0);
-        --- memory 	to CFPGA
-            BASERAMWE           : out std_logic;   --write                    
-            BASERAMOE           : out std_logic;    --read                   
-            BASERAMCE           : out std_logic;		--cs
-            BASERAMADDR         : out std_logic_vector(19 downto 0);                                                              
-            BASERAMDATA         : inout std_logic_vector(31 downto 0)
+            draw : out std_logic;
+            cursor_x : out std_logic_vector(8 downto 0);
+            cursor_y : out std_logic_vector(8 downto 0);
+            reset_canvas : out std_logic
         );
     end component;
 
 
-	begin
-		v2:VGA_Controller port map(CLK_in=>clk100, reset=>rst, hs=>hso, vs=>vso, oRed=>ored, oGreen=>ogreen, oBlue=>oblue, R=>midRed, G=>midGreen, B=>midBlue, addr=>VGA_RAM_addr, VGA_CLK=>vga_clk);
-      vtran:VGActSRAM port map(clk=>vga_clk, rst=>rst, vR=>midRed, vG=>midGreen, vB=>midBlue, RAMdata=>bufferdata);
-		u2:uart port map(clk=>clk11,rst=>rst, rx=>rx, tx=>tx, RamAddr=>Uart_RAM_addr, RamData=>Uart_to_RAM_data, uart_clk_out=>uart_clk,draw=>draw_uart);
-        -- rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>addr_for_ram_read, addr_write=>addr_for_ram_write,data_in=>data_for_ram, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
-		rm:SRAM port map(clk=>clk100, reset=>rst, mode=>rwmode, addr_read=>VGA_RAM_addr, addr_write=>Uart_RAM_addr,data_in=>Uart_to_RAM_data, rwdata=>bufferdata,BASERAMWE=>WE, BASERAMCE=>CE, BASERAMOE=>OE, BASERAMADDR=>addr_sram, BASERAMDATA=>data_sram);
+begin
+    v2:VGA_Controller port map(x_out=>vga_x, y_out=>vga_y, rgbin=>vgadata, CLK_in=>clk100, reset=>rst, hs=>hso, vs=>vso, oRed=>ored, oGreen=>ogreen, oBlue=>oblue, VGA_CLK=>vga_clk,cursor_x=>cur_x, cursor_y=>cur_y);
+    u2:uart port map(x=>uart_x, y=>uart_y, color=>uartdata, clk=>clk11,rst=>rst, rx=>rx, tx=>tx, uart_clk_out=>uart_clk, cursor_x=>cur_x, cursor_y=>cur_y);
+    mem:ram port map(data=>uartdata, rdaddress=>read_addr, rdclock=>vga_clk, wraddress=>write_addr, wrclock=>uart_clk, wren=>wren, q=>vgadata);
 
-
-    process(clk100)
+    process (clk100)
     begin
-        if rising_edge(clk100) then
-            -- Shift the value of button in button_r
-            -- The LSB is unused and is there solely for metastability
-            button1_r <= button1_r(button1_r'left-1 downto 0) & uart_clk;
-            button2_r <= button2_r(button2_r'left-1 downto 0) & vga_clk;
-
-				
-            if button1_r(button1_r'left downto button1_r'left-1) = "01" then -- Button1 rising
-                if draw_uart = '0' then
-                    rwmode <= "01";
-                else
-                    rwmode <= "10";
-                end if;
-               -- addr_for_ram_write <= Uart_RAM_addr;
-               -- data_for_ram <= Uart_to_RAM_data;
-            elsif button2_r(button2_r'left downto button2_r'left-1) = "01" then -- Button2 rising
-                rwmode <= "01";
-               -- addr_for_ram_read <= VGA_RAM_addr;
-				else
-				   rwmode <= "00";
-            end if;
+        if clk100'event and clk100 = '1' then -- calculate read & write address
+            --read_addr <= std_logic_vector(resize(unsigned(vga_y) * 320 + unsigned(vga_x), 17));
+            --write_addr <= std_logic_vector(resize(unsigned(uart_y) * 320 + unsigned(uart_x), 17));
+				read_addr <= vga_x & vga_y(7 downto 0);
+            --write_addr <= uart_x & uart_y(7 downto 0);
         end if;
     end process;
-	 
-	 process(clk100)
+	
+	 process(uart_clk)
 	 begin
-		lightout(0) <= midGreen(0);
-		lightout(1) <= midGreen(1);
-		lightout(2) <= midGreen(2);
-		lightout(3) <= midBlue(0);
-		lightout(4) <= midBlue(1);
-		lightout(5) <= midBlue(2);
-		lightout(6) <= midRed(0);
-		lightout(7) <= midRed(1);
-		lightout(8) <= midRed(2);
- 	 end process;
-	 -- process(clk100)
-	 --begin
-	--	LEDRX <= RAM_to_VGA_data(7 downto 0);
-	-- end process;
+		if rising_edge(uart_clk) then
+			 write_addr <= uart_x & uart_y(7 downto 0);
+		end if;
+	end process;
+	 
 end architecture bha;
